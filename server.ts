@@ -211,14 +211,14 @@ function createHttpsServer(keys) {
   https.createServer({
     key: keys.serviceKey,
     cert: keys.certificate
-  }, app).listen(environment.ui.port, environment.ui.host, () => {
+  }, app).listen(environment.ui.port, '0.0.0.0', () => {
     serverStarted();
   });
 }
 
 function run() {
   const port = environment.ui.port || 4000;
-  const host = environment.ui.host || '/';
+  const host = '0.0.0.0' || '/';
 
   // Start up the Node server
   const server = app();
