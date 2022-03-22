@@ -218,10 +218,11 @@ function createHttpsServer(keys) {
 
 function run() {
   const port = environment.ui.port || 4000;
-  const host = '0.0.0.0' || '/';
+  const host = '0.0.0.0';
 
   // Start up the Node server
   const server = app();
+  console.warn('TEST LOG during startup');
   server.listen(port, host, () => {
     serverStarted();
   });
