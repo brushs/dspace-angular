@@ -208,6 +208,7 @@ function serverStarted() {
  * @param keys SSL credentials
  */
 function createHttpsServer(keys) {
+  console.log('TEST LOG during startup 2: ' + '0.0.0.0');
   https.createServer({
     key: keys.serviceKey,
     cert: keys.certificate
@@ -222,7 +223,7 @@ function run() {
 
   // Start up the Node server
   const server = app();
-  console.warn('TEST LOG during startup');
+  console.log('TEST LOG during startup: ' + host);
   server.listen(port, host, () => {
     serverStarted();
   });
