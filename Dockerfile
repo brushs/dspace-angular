@@ -24,4 +24,4 @@ EXPOSE 4000 2222
 # We run yarn install with an increased network timeout (5min) to avoid "ESOCKETTIMEDOUT" errors from hub.docker.com
 # See, for example https://github.com/yarnpkg/yarn/issues/5540
 RUN yarn install --network-timeout 300000
-CMD yarn run start:dev
+CMD /usr/sbin/sshd && yarn run start:dev
