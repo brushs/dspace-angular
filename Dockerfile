@@ -5,11 +5,8 @@ FROM node:14-alpine
 
 # Install OpenSSH and set the password for root to "Docker!"
 ENV SSH_PASSWD "root:Docker!"
-RUN apt-get update \
-        && apt-get install -y --no-install-recommends dialog \
-        && apt-get update \
-  && apt-get install -y --no-install-recommends openssh-server \
-  && echo "$SSH_PASSWD" | chpasswd
+RUN RUN apk add --no-cache openssh \
+    && echo "$SSH_PASSWD" | chpasswd
 
 # Copy the sshd_config file to the /etc/ssh/ directory
 COPY sshd_config /etc/ssh/
