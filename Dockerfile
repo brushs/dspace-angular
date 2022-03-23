@@ -3,6 +3,8 @@
 
 FROM node:12-alpine
 
+RUN apk add curl
+
 # Install OpenSSH and set the password for root to "Docker!"
 ENV SSH_PASSWD "root:Docker!"
 RUN apk add --no-cache openssh \
