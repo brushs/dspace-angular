@@ -33,10 +33,10 @@ COPY sshd_config /etc/ssh/
 # Copy and configure the ssh_setup file
 RUN mkdir -p /tmp
 COPY ssh_setup.sh /tmp
-#RUN chmod +x /tmp/ssh_setup.sh \
-#    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null)
+RUN sed -i 's/\r//g' /tmp/ssh_setup.sh
+RUN chmod +x /tmp/ssh_setup.sh \
+    && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null)
 
 # Expose port 80
 EXPOSE 4000 2222
-#CMD /usr/sbin/sshd && yarn run serve
-CMD yarn run serve
+CMD /usr/sbin/sshd && yarn run serve
