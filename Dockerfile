@@ -15,17 +15,29 @@ RUN yarn run build
 
 
 # Use second image to serve output
-FROM node:12-alpine
+#FROM node:12-alpine
 
-WORKDIR /app
-COPY --from=build ./app /app
+# Use official nginx image as the base image
+FROM nginx:latest
 
-RUN apk add curl
+# Copy the build output to replace the default nginx contents.
+COPY --from=build /app/dist/browser /usr/share/nginx/html
+#COPY --from=build /app/src/environments/environment.ts /usr/share/nginx
+
+COPY ./nginx.conf /etc/nginx
+
+#WORKDIR /app
+#COPY --from=build ./app /app
+
+#RUN apk add curl
 
 # Install OpenSSH and set the password for root to "Docker!"
 ENV SSH_PASSWD "root:Docker!"
-RUN apk add --no-cache openssh \
-    && echo "$SSH_PASSWD" | chpasswd
+RUN apt-get update \
+        && apt-get install -y --no-install-recommends dialog \
+        && apt-get update \
+  && apt-get install -y --no-install-recommends openssh-server \
+  && echo "$SSH_PASSWD" | chpasswd
 
 # Copy the sshd_config file to the /etc/ssh/ directory
 COPY sshd_config /etc/ssh/
@@ -37,6 +49,6 @@ RUN sed -i 's/\r//g' /tmp/ssh_setup.sh
 RUN chmod +x /tmp/ssh_setup.sh \
     && (sleep 1;/tmp/ssh_setup.sh 2>&1 > /dev/null)
 
-# Expose port 80
+# Expose
 EXPOSE 4000 2222
-CMD /usr/sbin/sshd && yarn run serve
+CMD /usr/sbin/sshd && nginx -g 'daemon off;'

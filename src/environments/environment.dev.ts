@@ -21,7 +21,7 @@ export const environment: Partial<GlobalConfig> = {
   rest: {
     ssl: true,
     host: 'dspacebackendsteve.azurewebsites.net',
-    port: 8080,
+    port: null,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server',
   }
