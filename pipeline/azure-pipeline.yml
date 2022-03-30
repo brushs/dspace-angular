@@ -15,7 +15,7 @@ variables:
   containerRegistry: 'dspacesandbox.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
-  azureSubscription: 'Visual Studio Enterprise Subscription – MPN'
+  azureSubscription: 'nrcan-cmss-dsld-sandbox'
   appName: 'dspacesandboxfrontend'
 
   # Agent VM image name
