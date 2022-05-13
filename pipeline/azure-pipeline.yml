@@ -4,6 +4,7 @@
 
 trigger:
 - main
+- dev
 
 resources:
 - repo: self
@@ -71,7 +72,8 @@ stages:
         azureSubscription: $(azureSubscription)
         appName: $(appName)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
-        
+         condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/dev'))
+
 - stage: ProdDeploy
   displayName: Build and push stage
   jobs:
@@ -91,10 +93,13 @@ stages:
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
-          $(tag)
+          $(latest)
     - task: AzureWebAppContainer@1
       displayName: 'Azure Web App on Container Deploy'
       inputs:
         azureSubscription: $(azureSubscription)
         appName: $(appName)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+
+         - task: PostBuildCleanup@3
