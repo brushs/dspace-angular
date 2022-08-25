@@ -26,9 +26,13 @@ switch (environment) {
     console.log(`Building ${colors.blue.bold(`test`)} environment`);
     environmentFilePath = '../src/environments/environment.test.ts';
     break;
-  default:
+  case '--dev':
     console.log(`Building ${colors.green.bold(`development`)} environment`);
     environmentFilePath = '../src/environments/environment.dev.ts';
+    break;
+  default:
+    console.log(`Building ${colors.green.bold(`local`)} environment`);
+    environmentFilePath = '../src/environments/environment.local.ts';
 }
 
 const processEnv = {

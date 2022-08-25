@@ -8,8 +8,8 @@ export const environment: GlobalConfig = {
   // Angular Universal server settings.
   // NOTE: these must be "synced" with the 'dspace.ui.url' setting in your backend's local.cfg.
   ui: {
-    ssl: true,
-    host: '0.0.0.0',
+    ssl: false,
+    host: 'localhost',
     port: 4000,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/',
@@ -22,8 +22,8 @@ export const environment: GlobalConfig = {
   // The REST API server settings.
   // NOTE: these must be "synced" with the 'dspace.server.url' setting in your backend's local.cfg.
   rest: {
-    ssl: true,
-    host: 'dspacebackendsteve.azurewebsites.net',
+    ssl: false,
+    host: 'localhost',
     port: 8080,
     // NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
     nameSpace: '/server',
