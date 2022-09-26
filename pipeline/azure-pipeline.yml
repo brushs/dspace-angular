@@ -13,11 +13,11 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '8bbbbc97-33c8-402e-af00-550310380594'
   imageRepository: 'dspaceangular'
-  containerRegistry: 'dspacesandbox.azurecr.io'
+  containerRegistry: 'stevedspaceregistry.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
-  azureSubscription: 'nrcan-cmss-dsld-sandbox'
-  appName: 'dspacesandboxfrontend'
+  azureSubscription: 'Visual Studio Enterprise Subscription – MPN'
+  appName: 'dspaceangularsteve'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -28,7 +28,8 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool: OIR pool
+    pool:
+      vmImage: $(vmImageName)
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
@@ -75,4 +76,3 @@ stages:
             condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
 
           - task: PostBuildCleanup@3
-          
