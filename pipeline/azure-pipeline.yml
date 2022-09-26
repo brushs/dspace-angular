@@ -44,7 +44,7 @@ stages:
       displayName: 'Azure Web App on Container Deploy'
       inputs:
         azureSubscription: $(azureSubscription)
-        appName: $(appName + "Dev")
+        appName: $(appName)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
 
 - stage: ProdDeploy
