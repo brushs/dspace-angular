@@ -47,32 +47,3 @@ stages:
         appName: $(appName)
         containers: $(containerRegistry)/$(imageRepository):$(tag)
 
-- stage: ProdDeploy
-  
-  jobs:
-  - deployment: ProdDeploy
-    environment: Prod
-     
-    pool:
-      vmImage: $(vmImageName)
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: Docker@2
-            displayName: Build and push an image to container registry
-            inputs:
-              command: buildAndPush
-              repository: $(imageRepository)
-              dockerfile: $(dockerfilePath)
-              containerRegistry: $(dockerRegistryServiceConnection)
-              tags: $(latest)
-          - task: AzureWebAppContainer@1
-            displayName: 'Azure Web App on Container Deploy'
-            inputs:
-              azureSubscription: $(azureSubscription)
-              appName: $(appName + "Prod")
-              containers: $(containerRegistry)/$(imageRepository):$(tag)
-            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-
-          - task: PostBuildCleanup@3
