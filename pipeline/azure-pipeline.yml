@@ -18,6 +18,7 @@ variables:
   tag: '$(Build.BuildId)'
   azureSubscription: 'Visual Studio Enterprise Subscription – MPN'
   appName: 'dspaceangularsteve'
+  targetEnv: $(TARGET_ENV)
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
@@ -38,7 +39,7 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        arguments: --TARGET_ENV apption
+        arguments: --TARGET_ENV targetEnv
         tags: |
           $(tag)
     - task: AzureWebAppContainer@1
