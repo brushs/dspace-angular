@@ -9,27 +9,19 @@ ADD . /app/
 # We run yarn install with an increased network timeout (5min) to avoid "ESOCKETTIMEDOUT" errors from hub.docker.com
 # See, for example https://github.com/yarnpkg/yarn/issues/5540
 RUN yarn install --network-timeout 300000
+ENV NODE_ENV development
+RUN yarn run set-env
 RUN yarn run build
 #RUN node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build
 
-
-
 # Use second image to serve output
-#FROM node:12-alpine
-
 # Use official nginx image as the base image
 FROM nginx:latest
 
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /app/dist/browser /usr/share/nginx/html
-#COPY --from=build /app/src/environments/environment.ts /usr/share/nginx
 
 COPY ./nginx.conf /etc/nginx
-
-#WORKDIR /app
-#COPY --from=build ./app /app
-
-#RUN apk add curl
 
 # Install OpenSSH and set the password for root to "Docker!"
 ENV SSH_PASSWD "root:Docker!"
@@ -52,17 +44,9 @@ RUN chmod +x /tmp/ssh_setup.sh \
 # Expose
 EXPOSE 4000 2222
 
-# We run yarn install with an increased network timeout (5min) to avoid "ESOCKETTIMEDOUT" errors from hub.docker.com
-# See, for example https://github.com/yarnpkg/yarn/issues/5540
-#RUN yarn install --network-timeout 300000
-
 # On startup, run in DEVELOPMENT mode (this defaults to live reloading enabled, etc).
 # Listen / accept connections from all IP addresses.
 # NOTE: At this time it is only possible to run Docker container in Production mode
 # if you have a public IP. See https://github.com/DSpace/dspace-angular/issues/1485
-#CMD yarn serve --host 0.0.0.0
-#CMD /usr/sbin/sshd && yarn run start:dev
-#CMD /usr/sbin/sshd && yarn run serve
-# CMD yarn run serve
-#CMD /usr/sbin/sshd && yarn run serve
+
 CMD /usr/sbin/sshd && nginx -g 'daemon off;'

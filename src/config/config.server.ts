@@ -8,11 +8,11 @@ import { Config } from './config.interface';
 import { DefaultAppConfig } from './default-app-config';
 import { ServerConfig } from './server-config.interface';
 import { mergeConfig } from './config.util';
-import { isNotEmpty } from '../app/shared/empty.util';
+import { isNotEmpty, isEmpty } from '../app/shared/empty.util';
 
 const CONFIG_PATH = join(process.cwd(), 'config');
 
-type Environment = 'production' | 'development' | 'test';
+type Environment = 'production' | 'development' | 'test' | 'sandbox';
 
 const DSPACE = (key: string): string => {
   return `DSPACE_${key}`;
@@ -54,7 +54,7 @@ const getEnvironment = (): Environment => {
   return environment;
 };
 
-const getLocalConfigPath = (env: Environment) => {
+const getLocalConfigPath = (env: string) => {
   // default to config/config.yml
   let localConfigPath = join(CONFIG_PATH, 'config.yml');
 
@@ -156,12 +156,15 @@ const buildBaseUrl = (config: ServerConfig): void => {
  * @param destConfigPath optional path to save config file
  * @returns app config
  */
-export const buildAppConfig = (destConfigPath?: string): AppConfig => {
+export const buildAppConfig = (destConfigPath?: string, envToConfig?: string): AppConfig => {
   // start with default app config
   const appConfig: AppConfig = new DefaultAppConfig();
 
   // determine which dist app config by environment
-  const env = getEnvironment();
+  let env = envToConfig;
+  if (isEmpty(env)) {
+    env = getEnvironment();
+  }
 
   switch (env) {
     case 'production':
@@ -192,6 +195,7 @@ export const buildAppConfig = (destConfigPath?: string): AppConfig => {
     }
   }
 
+  console.log(`This should work: ` + destConfigPath);
   // override with environment variables
   overrideWithEnvironment(appConfig);
 
