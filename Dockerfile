@@ -9,7 +9,7 @@ ADD . /app/
 # We run yarn install with an increased network timeout (5min) to avoid "ESOCKETTIMEDOUT" errors from hub.docker.com
 # See, for example https://github.com/yarnpkg/yarn/issues/5540
 RUN yarn install --network-timeout 300000
-ENV NODE_ENV development
+ENV NODE_ENV apption
 RUN yarn run set-env
 RUN yarn run build
 #RUN node --max_old_space_size=8192 node_modules/@angular/cli/bin/ng build

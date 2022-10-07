@@ -38,3 +38,5 @@ package-lock.json
 /nbproject/
 
 junit.xml
+
+.env

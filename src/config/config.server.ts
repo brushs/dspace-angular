@@ -12,7 +12,7 @@ import { isNotEmpty, isEmpty } from '../app/shared/empty.util';
 
 const CONFIG_PATH = join(process.cwd(), 'config');
 
-type Environment = 'production' | 'development' | 'test' | 'sandbox';
+type Environment = 'production' | 'development' | 'test' | 'sandbox' | 'apption';
 
 const DSPACE = (key: string): string => {
   return `DSPACE_${key}`;
@@ -42,6 +42,12 @@ const getEnvironment = (): Environment => {
       case 'test':
         environment = 'test';
         break;
+      case 'sandbox':
+        environment = 'sandbox';
+        break;
+      case 'apption':
+        environment = 'apption';
+        break;
       case 'dev':
       case 'development':
         environment = 'development';
@@ -70,6 +76,12 @@ const getLocalConfigPath = (env: string) => {
       break;
     case 'test':
       envVariations = ['test'];
+      break;
+    case 'apption':
+      envVariations = ['apption'];
+      break;
+    case 'sandbox':
+      envVariations = ['sandbox'];
       break;
     case 'development':
     default:
@@ -173,6 +185,12 @@ export const buildAppConfig = (destConfigPath?: string, envToConfig?: string): A
     case 'test':
       console.log(`Building ${colors.blue.bold(`test`)} app config`);
       break;
+    case 'sandbox':
+      console.log(`Building ${colors.blue.bold(`sandbox`)} app config`);
+      break;
+    case 'apption':
+      console.log(`Building ${colors.blue.bold(`apption`)} app config`);
+      break;
     default:
       console.log(`Building ${colors.green.bold(`development`)} app config`);
   }
@@ -195,7 +213,6 @@ export const buildAppConfig = (destConfigPath?: string, envToConfig?: string): A
     }
   }
 
-  console.log(`This should work: ` + destConfigPath);
   // override with environment variables
   overrideWithEnvironment(appConfig);
 
