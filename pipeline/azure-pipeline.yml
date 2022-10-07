@@ -38,6 +38,7 @@ stages:
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
+        arguments: --TARGET_ENV apption
         tags: |
           $(tag)
     - task: AzureWebAppContainer@1
