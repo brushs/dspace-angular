@@ -11,13 +11,13 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '8bbbbc97-33c8-402e-af00-550310380594'
-  imageRepository: 'dspaceangular'
-  containerRegistry: 'stevedspaceregistry.azurecr.io'
+  dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
+  imageRepository: $(IMAGE_REPOSITORY)
+  containerRegistry: $(CONTAINER_REGISTRY)
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
-  azureSubscription: 'Visual Studio Enterprise Subscription – MPN'
-  appName: 'dspaceangularsteve'
+  azureSubscription: $(AZURE_SUBSCRIPTION)
+  appName: $(APP_NAME)
   targetEnv: $(TARGET_ENV)
 
   # Agent VM image name
