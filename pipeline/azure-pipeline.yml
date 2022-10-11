@@ -39,7 +39,7 @@ stages:
         command: 'build'
         Dockerfile: $(dockerfilePath)
         tags: $(tag)
-        arguments: 'TARGET_ENV=$(targetEnv)'
+        arguments: '--build_arg TARGET_ENV=$(targetEnv)'
 
     - task: Docker@2
       displayName: Push
