@@ -48,7 +48,6 @@ stages:
       inputs:
         command: push
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
          $(tag)
