@@ -11,6 +11,7 @@ ADD . /app/
 # We run yarn install with an increased network timeout (5min) to avoid "ESOCKETTIMEDOUT" errors from hub.docker.com
 # See, for example https://github.com/yarnpkg/yarn/issues/5540
 RUN yarn install --network-timeout 300000
+RUN echo $TARGET_ENV
 ENV NODE_ENV $TARGET_ENV
 RUN yarn run set-env
 ENV NODE_ENV $BUILD_ENV
