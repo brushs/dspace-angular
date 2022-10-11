@@ -38,7 +38,6 @@ stages:
       inputs:
         command: build
         dockerfile: $(dockerfilePath)
-        tags: latest
         arguments: --TARGET_ENV targetEnv
         tags: |
          $(tag)
