@@ -1,5 +1,7 @@
 # This image will be published as dspace/dspace-angular
 # See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
+ARG TARGET_ENV
+ARG BUILD_ENV
 
 FROM node:14-alpine as build
 
