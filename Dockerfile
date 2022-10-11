@@ -2,9 +2,6 @@
 # See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
 
 FROM node:14-alpine as build
-ARG TARGET_ENV=test
-ARG BUILD_ENV
-RUN echo "TARGET ENV:" || $TARGET_ENV
 
 WORKDIR /app
 ADD . /app/
@@ -12,6 +9,8 @@ ADD . /app/
 # We run yarn install with an increased network timeout (5min) to avoid "ESOCKETTIMEDOUT" errors from hub.docker.com
 # See, for example https://github.com/yarnpkg/yarn/issues/5540
 RUN yarn install --network-timeout 300000
+ARG TARGET_ENV
+RUN echo "Target Env: " || $TARGET_ENV
 ENV NODE_ENV $TARGET_ENV
 RUN yarn run set-env
 ENV NODE_ENV $BUILD_ENV
