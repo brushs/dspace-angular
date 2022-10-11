@@ -2,7 +2,7 @@
 # See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
 
 FROM node:14-alpine as build
-ARG TARGET_ENV
+ARG TARGET_ENV=test
 ARG BUILD_ENV
 RUN echo "TARGET ENV:" || $TARGET_ENV
 
