@@ -32,16 +32,27 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
+
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build
       inputs:
-        command: buildAndPush
+        command: build
+        dockerfile: $(dockerfilePath)
+        tags: latest
+        arguments: --TARGET_ENV targetEnv
+        tags: |
+         $(tag)
+
+    - task: Docker@2
+      displayName: Push
+      inputs:
+        command: push
         repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
         containerRegistry: $(dockerRegistryServiceConnection)
-        arguments: --TARGET_ENV targetEnv
         tags: |
-          $(tag)
+         $(tag)
+
     - task: AzureWebAppContainer@1
       displayName: 'Azure Web App on Container Deploy'
       inputs:
