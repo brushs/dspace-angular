@@ -38,7 +38,8 @@ stages:
       inputs:
         command: 'build'
         Dockerfile: $(dockerfilePath)
-        tags: $(tag)
+        tags: |
+          $(tag)
         arguments: '--build-arg TARGET_ENV=apption'
 
     - task: Docker@2
@@ -47,7 +48,8 @@ stages:
         command: push
         repository: $(imageRepository)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: '$(tag)'
+        tags: |
+          $(tag)
 
     - task: AzureWebAppContainer@1
       displayName: 'Azure Web App on Container Deploy'
