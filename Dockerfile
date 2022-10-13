@@ -3,18 +3,6 @@
 
 FROM node:14-alpine as build
 
-# make sure the package repository is up to date
-RUN apk update \
- && apk upgrade \
- && apk add bash \
- && rm -rf /var/cache/*/* \
- && echo "" > /root/.ash_history
-
-# change default shell from ash to bash
-RUN sed -i -e "s/bin\/ash/bin\/bash/" /etc/passwd
-
-ENV LC_ALL=en_US.UTF-8
-
 ARG TEST_ARG=testArgument
 RUN echo "Test Arg: " || $TEST_ARG
 RUN echo "Test Arg Win: " || %TEST_ARG%
