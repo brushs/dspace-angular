@@ -17,6 +17,7 @@ ENV LC_ALL=en_US.UTF-8
 
 ARG TEST_ARG=testArgument
 RUN echo "Test Arg: " || $TEST_ARG
+RUN echo "Test Arg Win: " || %TEST_ARG%
 
 WORKDIR /app
 ADD . /app/
