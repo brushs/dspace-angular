@@ -6,6 +6,8 @@ FROM node:14-alpine as build
 ARG TEST_ARG=testArgument
 RUN echo "Test Arg: " || $TEST_ARG
 RUN echo "Test Arg Win: " || %TEST_ARG%
+RUN echo "Test Arg Win2: " || $(TEST_ARG)
+RUN echo "Test Arg Win3: " || ${TEST_ARG}
 
 WORKDIR /app
 ADD . /app/
