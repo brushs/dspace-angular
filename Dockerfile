@@ -2,6 +2,8 @@
 # See https://github.com/DSpace/dspace-angular/tree/main/docker for usage details
 
 FROM node:14-alpine as build
+ARG TEST_ARG=testArgument
+RUN echo "Test Arg: " || $TEST_ARG
 
 WORKDIR /app
 ADD . /app/
