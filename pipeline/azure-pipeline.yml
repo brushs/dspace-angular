@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
   imageRepository: $(IMAGE_REPOSITORY)
   containerRegistry: $(CONTAINER_REGISTRY)
-  dockerfilePath: '$(Build.SourcesDirectory)/docker/Dockerfile-apption'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile-apption'
   tag: '$(Build.BuildId)'
   azureSubscription: $(AZURE_SUBSCRIPTION)
   appName: $(APP_NAME)
