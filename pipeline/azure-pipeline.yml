@@ -14,7 +14,7 @@ variables:
   dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
   imageRepository: $(IMAGE_REPOSITORY)
   containerRegistry: $(CONTAINER_REGISTRY)
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/docker/Dockerfile-{TARGET_ENV}'
   tag: '$(Build.BuildId)'
   azureSubscription: $(AZURE_SUBSCRIPTION)
   appName: $(APP_NAME)
@@ -39,7 +39,6 @@ stages:
         Dockerfile: $(dockerfilePath)
         tags: |
           $(tag)
-        arguments: '--build-arg TARGET_ENV=apption'
 
     - task: Docker@2
       displayName: Push
