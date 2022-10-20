@@ -36,6 +36,7 @@ stages:
       displayName: Build
       inputs:
         command: 'build'
+        repository: $(imageRepository)
         Dockerfile: $(dockerfilePath)
         tags: |
           $(tag)
