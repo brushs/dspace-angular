@@ -1,0 +1,25 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- oir-dev
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
+  imageRepository: $(IMAGE_REPOSITORY)
+  containerRegistry: $(CONTAINER_REGISTRY)
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile-apption'
+  tag: '$(Build.BuildId)'
+  azureSubscription: $(AZURE_SUBSCRIPTION)
+  appName: $(APP_NAME)
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- template: azure-pipeline-template.yml

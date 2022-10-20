@@ -4,6 +4,9 @@ debug: false
 # Angular Universal server settings
 # NOTE: these must be 'synced' with the 'dspace.ui.url' setting in your backend's local.cfg.
 ui:
+  ssl: true
+  host: dspacesandboxangular.azurewebsites.net
+  port: 4000
   # NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
   nameSpace: /
   # The rateLimiter settings limit each IP to a 'max' of 500 requests per 'windowMs' (1 minute).
@@ -14,6 +17,9 @@ ui:
 # The REST API server settings
 # NOTE: these must be 'synced' with the 'dspace.server.url' setting in your backend's local.cfg.
 rest:
+  ssl: true
+  host: dspacesandboxbackend.azurewebsites.net
+  port: null
   # NOTE: Space is capitalized because 'namespace' is a reserved string in TypeScript
   nameSpace: /server
 
