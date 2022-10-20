@@ -3,7 +3,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/docker
 
 trigger:
-- oir-dev
+- oir-sandbox
 
 resources:
 - repo: self
@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
   imageRepository: $(IMAGE_REPOSITORY)
   containerRegistry: $(CONTAINER_REGISTRY)
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile-apption'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile-sandbox'
   tag: '$(Build.BuildId)'
   azureSubscription: $(AZURE_SUBSCRIPTION)
   appName: $(APP_NAME)
@@ -22,4 +22,4 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- template: azure-pipeline-template.yml
+- template: azure-pipeline-stages.yml

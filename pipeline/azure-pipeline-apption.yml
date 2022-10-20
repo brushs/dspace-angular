@@ -22,4 +22,4 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- template: azure-pipeline-template.yml
+- template: azure-pipeline-stages.yml
