@@ -15,7 +15,7 @@ variables:
   imageRepository: $(IMAGE_REPOSITORY)
   containerRegistry: $(CONTAINER_REGISTRY)
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile-apption'
-  tag: '***/dspacenangular:$(Build.BuildId)'
+  tag: '$(Build.BuildId)'
   azureSubscription: $(AZURE_SUBSCRIPTION)
   appName: $(APP_NAME)
 
