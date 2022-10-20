@@ -37,6 +37,7 @@ stages:
       inputs:
         command: 'build'
         repository: $(imageRepository)
+        containerRegistry: $(CONTAINER_REGISTRY)
         Dockerfile: $(dockerfilePath)
         tags: $(tag)
 
