@@ -5,7 +5,8 @@ variables:
   dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
   imageRepository: $(IMAGE_REPOSITORY)
   containerRegistry: $(CONTAINER_REGISTRY)
-  dockerfilePath: '$(Build.SourcesDirectory)'/'$(DOCKERFILE_NAME)'
+  dockerfilePath: '$(Build.SourcesDirectory)'
+  dockerfileName: '$(DOCKERFILE_NAME)'
   tag: '$(Build.BuildId)'
   azureSubscription: $(AZURE_SUBSCRIPTION)
   appName: $(APP_NAME)
@@ -29,7 +30,7 @@ stages:
         command: 'build'
         repository: $(imageRepository)
         containerRegistry: $(dockerRegistryServiceConnection)
-        Dockerfile: $(dockerfilePath)
+        Dockerfile: $(dockerfilePath)/$(dockerfileName)
         tags: $(tag)
 
     - task: Docker@2
