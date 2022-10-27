@@ -1,5 +1,18 @@
 # The build and deploy steps for the OIR Project
 
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: $(DOCKER_REG_SERVICE_CONNECTION)
+  imageRepository: $(IMAGE_REPOSITORY)
+  containerRegistry: $(CONTAINER_REGISTRY)
+  dockerfilePath: '$(Build.SourcesDirectory)/'$(DOCKERFILE_NAME)'
+  tag: '$(Build.BuildId)'
+  azureSubscription: $(AZURE_SUBSCRIPTION)
+  appName: $(APP_NAME)
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
 stages:
 - stage: Build
   displayName: Build and push stage
