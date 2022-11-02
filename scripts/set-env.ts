@@ -26,6 +26,10 @@ switch (environment) {
     console.log(`Building ${colors.blue.bold(`test`)} environment`);
     environmentFilePath = '../src/environments/environment.test.ts';
     break;
+  case '--sandbox':
+    console.log(`Building ${colors.blue.bold(`sandbox`)} environment`);
+    environmentFilePath = '../src/environments/environment.sandbox.ts';
+    break;
   case '--dev':
     console.log(`Building ${colors.green.bold(`development`)} environment`);
     environmentFilePath = '../src/environments/environment.dev.ts';
